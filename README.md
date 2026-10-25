@@ -10,6 +10,10 @@ Training an agent to land a rocket in Gymnasium's `LunarLander-v3` using Stable-
 - `python3.11 -m venv lander-env && source lander-env/bin/activate`
 - `pip install "gymnasium[box2d]" "stable-baselines3[extra]" torch scipy`
 
+## What this demonstrates
+
+The core result here isn't "an RL agent that lands a rocket" — it's catching a false positive. A single-seed run made reward shaping look like an unambiguous win; a 5-seed ablation with Welch's t-tests showed that result didn't hold, and only strong shaping produced a statistically real effect. That's the same discipline validating any uncertain result requires before you act on it: don't trust an n=1 result, quantify the uncertainty, and test whether an observed difference is signal or noise.
+
 ## Results
 
 **Baseline PPO** (1M timesteps, 8 envs): 154.7 ± 122.6 reward over 20 eval episodes.

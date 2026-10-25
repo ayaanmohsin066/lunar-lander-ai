@@ -27,6 +27,8 @@ Training an agent to land a rocket in Gymnasium's `LunarLander-v3` using Stable-
 
 ### Does the shaping result hold up? — 5-seed ablation
 
+![Ablation results](ablation_results.png)
+
 Ran each coefficient × 5 random seeds (25 training runs, 1M timesteps each) and compared against the unshaped baseline with Welch's t-test:
 
 | Coefficient | Mean reward | Crash rate | p-value vs. baseline |

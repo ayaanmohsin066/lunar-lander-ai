@@ -35,15 +35,17 @@ The core result here isn't "an RL agent that lands a rocket" — it's catching a
 
 Ran each coefficient × 5 random seeds (25 training runs, 1M timesteps each) and compared against the unshaped baseline with Welch's t-test:
 
-| Coefficient | Mean reward | Crash rate | p-value vs. baseline |
-|---|---|---|---|
-| 0.0 (baseline) | 230.9 ± 14.7 | 1.8% | — |
-| 0.5 | 235.4 ± 9.9 | 1.2% | 0.6300 (not significant) |
-| 2.0 | 223.8 ± 25.9 | 2.8% | 0.6509 (not significant) |
-| 5.0 | 183.9 ± 4.9 | 8.8% | **0.0020 (significant)** |
-| 10.0 | 162.4 ± 27.7 | 8.2% | **0.0046 (significant)** |
+| Coefficient | Mean reward | Crash rate | p-value vs. baseline | Cohen's d |
+|---|---|---|---|---|
+| 0.0 (baseline) | 230.9 ± 14.7 | 1.8% | — | — |
+| 0.5 | 235.4 ± 9.9 | 1.2% | 0.6300 (not significant) | 0.36 (small) |
+| 2.0 | 223.8 ± 25.9 | 2.8% | 0.6509 (not significant) | -0.34 (small) |
+| 5.0 | 183.9 ± 4.9 | 8.8% | **0.0020 (significant)** | **-4.29 (large)** |
+| 10.0 | 162.4 ± 27.7 | 8.2% | **0.0046 (significant)** | **-3.09 (large)** |
+
 
 **Finding:** moderate shaping (coef ≤ 2.0) is statistically indistinguishable from baseline reward — the earlier single-seed "win" was a favorable outlier, not a real effect. Strong shaping (coef ≥ 5.0) significantly degrades reward and increases crash rate. This is the actual point of the exercise: a single seed can lie, and multi-seed validation with a significance test catches it.
+Effect sizes corroborate the significance tests — the non-significant coefficients (0.5, 2.0) show small effect sizes (|d| < 0.4), while the significant ones (5.0, 10.0) show large effect sizes (|d| > 3).
 
 ## Files
 

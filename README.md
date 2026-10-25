@@ -47,6 +47,19 @@ Ran each coefficient × 5 random seeds (25 training runs, 1M timesteps each) and
 **Finding:** moderate shaping (coef ≤ 2.0) is statistically indistinguishable from baseline reward — the earlier single-seed "win" was a favorable outlier, not a real effect. Strong shaping (coef ≥ 5.0) significantly degrades reward and increases crash rate. This is the actual point of the exercise: a single seed can lie, and multi-seed validation with a significance test catches it.
 Effect sizes corroborate the significance tests — the non-significant coefficients (0.5, 2.0) show small effect sizes (|d| < 0.4), while the significant ones (5.0, 10.0) show large effect sizes (|d| > 3).
 
+### Does longer training help the wind-robust policy?
+
+![Wind robustness vs training duration](wind_robust_2M.png)
+
+Trained 3 additional seeds at 2M timesteps (double the standard budget) and compared windy-condition performance against the 1M-timestep seeds:
+
+| Training length | Windy reward (3-seed mean ± std) | Crash rate |
+|---|---|---|
+| 1M timesteps | 197.4 ± 5.2 | 7.0–9.0% |
+| 2M timesteps | 220.9 ± 10.2 | 4.0–6.0% |
+
+The improvement holds across every seed at 2M (219.6, 209.1, 234.0 — all above the 1M range of 190.2–202.6), consistent with the idea that a domain-randomized policy has a harder state space to cover and needs more samples to converge than a fixed-condition one.
+
 ## Files
 
 - `train.py` — baseline PPO training

@@ -60,6 +60,19 @@ Trained 3 additional seeds at 2M timesteps (double the standard budget) and comp
 
 The improvement holds across every seed at 2M (219.6, 209.1, 234.0 — all above the 1M range of 190.2–202.6), consistent with the idea that a domain-randomized policy has a harder state space to cover and needs more samples to converge than a fixed-condition one.
 
+**Exploratory: does the gain continue past 2M?** Ran one seed out to 10M timesteps with evaluation checkpoints every 1M steps (not a full multi-seed validation — treat as directional only):
+
+![1M to 10M training curve](wind_robust_10M_curve.png)
+
+| Timesteps | Reward | Crash rate |
+|---|---|---|
+| 1M | 190.2 | 9.0% |
+| 2M | 221.7 | 5.0% |
+| 5M | 243.3 | 3.0% |
+| 10M | 251.3 | 4.0% |
+
+The 1M→2M jump reproduces the validated finding above almost exactly (221.7 vs. the 3-seed-validated 220.9). Past 2M, reward gains flatten sharply (~15x lower reward-per-timestep than the first 1M) and crash rate stops improving, consistent with 2M being close to the point of diminishing returns for this policy. Not re-validated across seeds at these longer budgets, so treat the 5M–10M numbers as suggestive rather than confirmed.
+
 ## Files
 
 - `train.py` — baseline PPO training

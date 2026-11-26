@@ -2,3 +2,5 @@ lander-env/
 *.zip
 *_tensorboard/
 __pycache__/
+models/
+*.egg-info/
